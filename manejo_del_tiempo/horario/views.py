@@ -58,6 +58,9 @@ def user_register(request):
             login(request,user)
             return redirect(reverse("horario"))
         
+        else:
+            messages.error(request,"¡Usuario ó contraseña no validos!")
+        
     return render(request,'user_register.html',{'UserCreationForm':UserCreationForm})
         
     
