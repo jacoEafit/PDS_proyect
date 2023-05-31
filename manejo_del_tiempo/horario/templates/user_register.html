@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,15 +20,22 @@
               <div class="card rounded-3">
                 <img src="{% static 'imagenes/TIMEMASTER LOGO FINAL.png' %}" class="w-100 vh-10" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo">
                 <div class="card-body p-4 p-md-5">
-                  <h3 class="text-center mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Register...</h3>
+                  <h1 class="text-center mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Registro</h1>
+                    {% if messages %}
+                      {% for message in messages %}
+                        <div class="container-sm pb-3">
+                          <p class="alert alert-danger text-center mx-auto " style="max-width: 400px;">{{message}}</p>
+                        </div>
+                      {% endfor %}
+                    {% endif %}
       
                   <form class="px-md-2" method="POST" action"">
                     {% csrf_token %}
                     {{UserCreationForm}}
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                        <button type="submit" class="btn btn-info btn-block btn-lg gradient-custom-4 text-center mt-4">Submit</button>
+                        <button type="submit" class="btn btn-info btn-block btn-lg gradient-custom-4 text-center mt-4">Registro</button>
                     </div>
-                    <p class="text-center text-muted mt-1 mb-0">¿Already have an account? <a href="{% url 'user_login' %}" class="text-dark">login</a></p>
+                    <p class="text-center text-muted mt-1 mb-0">¿Ya tiene una cuenta? <a href="{% url 'user_login' %}" class="text-dark">login</a></p>
                     
                   </form>
                   
@@ -37,13 +44,6 @@
             </div>
           </div>
         </div>
-        {% if messages %}
-          {% for message in messages %}
-            <div class="container-sm pb-3">
-              <p class="alert alert-danger text-center mx-auto " style="max-width: 400px;">{{message}}</p>
-            </div>
-          {% endfor %}
-        {% endif %}
       </section>
 
     {% else %}

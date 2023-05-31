@@ -3,13 +3,13 @@
 
 {% block content %}
 
-   
-    <div class="container text-dark fw-bold text-center mt-5">
-        <h1 class="fw-bold">Horario</h1>
+    <link rel="stylesheet" href="{% static 'css/horario_final.css' %}">
+    <div class="container  bg-light-gray text-dark fw-bold text-center mt-5 rounded">
+        <h1 class="fw-bold text-dark ">Horario</h1>
     </div>
     
     <div class="table-responsive">
-        <table class="table table-striped table-bordered align-middle">
+        <table class="table  align-middle table-dark table-sm table-hover">
             <thead class="thead-light fw-bold">
                 <th scope="col">Hora</th>
                 <th scope="col">Lunes</td>
@@ -30,9 +30,13 @@
 
                 {% for event in hour %}
                     {% if event.name is null %}
-                        <td class="bg-light-gray"></td>
-                    {% else %}
-                        <td> {{ event.name }} </td>
+                        <td class=" bg-light-gray p-3 m-3 table-light"></td>
+                    {% elif event.event_type == "actividad_no_fija" %}
+                        <td class = " fw-bold p-3 m-3 table-info"> {{ event.name }} </td>
+                    {% elif event.event_type == "suenio" %}
+                        <td class = " fw-bold p-3 m-3 table-primary"> {{ event.name }} </td>
+                    {% elif event.event_type == "actividad_fija" %}
+                        <td class = "fw-bold p-3 m-3 table-success"> {{ event.name }} </td>
                     {% endif %}
                 {% endfor %}
                 </tr>
@@ -42,7 +46,7 @@
     </table>
 </div>
 <div class="container text-center">
-    <a class="btn btn-warning text-dark fw-bold" href="{% url 'restablecer_horario' %}">Restablecer horario</a>
+    <a class="btn btn-warning text-dark fw-bold" href="{% url 'restablecer_horario' %}">Guardar Cambios</a>
 </div>
 
 {% endblock content %}

@@ -87,7 +87,13 @@ Constraints:
 def suenio(request):
     user = User.objects.get(pk = request.user.pk)
     if request.method == "POST":
-        
+
+        horario_suenio = Event.objects.filter(user_id = user).filter(event_type = "suenio")
+
+        if (horario_suenio.exists()):
+            for suenio in horario_suenio:
+                suenio.delete()
+
         #Adquirir atributos y constraints:
         priority = 10
         name = "Dormir"

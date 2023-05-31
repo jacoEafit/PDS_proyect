@@ -22,12 +22,19 @@ def registrar_posiciones(actividades):
 
 def generate_schedule(schedule, adaptable_events):
     # TO DO
-    repeats = 0
+    
     adaptable_events_locations = []
     adaptable_events = list(adaptable_events)
+    repeats = {event: 0 for event in adaptable_events}
+
+    for i in adaptable_events:
+        print(i.name, i.priority, i.constraints)
+
     # Go over each hour in schedule
     for day in range(len(schedule)):
-        repeats = 0
+
+        repeats = {event: 0 for event in adaptable_events}
+
         for hour in range(len(schedule[day])):
             adaptable_events.sort(key = lambda event: event.priority, reverse = True)
 
@@ -41,9 +48,10 @@ def generate_schedule(schedule, adaptable_events):
                     # Check maximum time
                     if  hour > 0:
                         if adaptable_events[event_idx] == schedule[day][hour - 1]:
-                            repeats += 1
+                            repeats[adaptable_events[event_idx]] += 1
 
-                    if repeats != adaptable_events[event_idx].constraints["max_time"]:
+                    if repeats[adaptable_events[event_idx]] != adaptable_events[event_idx].constraints["max_time"]:
+                        
                         adaptable_events_locations.append((adaptable_events[event_idx], (day, hour)))
                         schedule[day][hour] = adaptable_events[event_idx]
                         adaptable_events[event_idx].constraints["time_goal_counter"] = adaptable_events[event_idx].constraints["time_goal_counter"] - 1
