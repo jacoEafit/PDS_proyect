@@ -27,9 +27,6 @@ def generate_schedule(schedule, adaptable_events):
     adaptable_events = list(adaptable_events)
     repeats = {event: 0 for event in adaptable_events}
 
-    for i in adaptable_events:
-        print(i.name, i.priority, i.constraints)
-
     # Go over each hour in schedule
     for day in range(len(schedule)):
 
